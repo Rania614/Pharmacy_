@@ -204,7 +204,7 @@ function Navigation() {
 
             {/* Profile */}
             <Link
-              to="/profile"
+              to="/login"
               className="flex-shrink-0 p-2 text-white/80 hover:text-white transition rounded-full hover:bg-white/10"
             >
               <User className="w-6 h-6" />
@@ -267,12 +267,12 @@ function Navigation() {
           </Link>
 
           <Link
-            to="/profile"
+            to="/login"
             className={`flex flex-col items-center justify-center flex-1 h-full transition ${
-              isActive('/profile') ? 'text-primary' : 'text-gray-600'
+              isActive('/login') ? 'text-primary' : 'text-gray-600'
             }`}
           >
-            <User className={`w-6 h-6 ${isActive('/profile') ? 'text-primary' : ''}`} />
+            <User className={`w-6 h-6 ${isActive('/login') ? 'text-primary' : ''}`} />
             <span className="text-xs mt-1">{t('nav.profile')}</span>
           </Link>
         </div>

@@ -128,9 +128,13 @@ function Cart() {
                   <span className="text-blue-600">{total.toFixed(2)} {t('common.egp')}</span>
                 </div>
               </div>
-              <button className="w-full bg-primary text-white py-3 rounded-full hover:bg-primary/90 transition font-semibold mb-3">
+              <Link
+                to="/checkout"
+                className="w-full bg-primary text-white py-3 rounded-full hover:bg-primary/90 transition font-semibold mb-3 flex items-center justify-center gap-2"
+              >
                 {t('cart.checkout')}
-              </button>
+                <ArrowRight className="w-5 h-5" />
+              </Link>
               <button
                 onClick={clearCart}
                 className="w-full bg-red-500 text-white py-3 rounded-full hover:bg-red-600 transition font-semibold"

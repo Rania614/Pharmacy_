@@ -75,8 +75,18 @@ function BestSellerProducts() {
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
-        {/* Header */}
-        <div className="flex items-center justify-between mb-12">
+        {/* Header - Mobile */}
+        <div className="md:hidden mb-6">
+          <h2 className="text-2xl font-bold text-gray-900 mb-2 text-right">
+            {t('bestSeller.title')}
+          </h2>
+          <p className="text-sm text-gray-600 text-right leading-relaxed">
+            {t('bestSeller.description')}
+          </p>
+        </div>
+
+        {/* Header - Desktop */}
+        <div className="hidden md:flex items-center justify-between mb-12">
           <div className="flex-1">
             <h2 className="text-4xl md:text-5xl font-serif text-center mb-4 text-gray-900">
               {t('bestSeller.title')}
@@ -103,8 +113,48 @@ function BestSellerProducts() {
           </div>
         </div>
 
-        {/* Products Carousel */}
-        <div className="relative mb-12">
+        {/* Mobile Design - Small Cards Grid */}
+        <div className="md:hidden mb-8">
+          <div className="grid grid-cols-2 gap-3">
+            {products.map((product) => (
+              <div key={product.id} className="bg-white rounded-xl shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden">
+                {/* Product Image */}
+                <Link to={`/products/${product.id}`} className="block">
+                  <div className="relative bg-gray-50 p-4 min-h-[120px] flex items-center justify-center">
+                    <img
+                      src={product.image}
+                      alt={product.name}
+                      className="w-full h-full object-contain max-h-[100px]"
+                      loading="lazy"
+                    />
+                  </div>
+                </Link>
+
+                {/* Product Info */}
+                <div className="p-3 text-center">
+                  <Link to={`/products/${product.id}`}>
+                    <h3 className="text-sm font-bold text-gray-900 mb-1 line-clamp-2 min-h-[2.5rem]">
+                      {product.name}
+                    </h3>
+                  </Link>
+                  <p className="text-base font-bold text-primary mb-2">
+                    {product.price.toFixed(2)} {t('common.egp')}
+                  </p>
+                  <button
+                    onClick={() => handleAddToCart(product)}
+                    className="w-full bg-primary text-white rounded-full py-2 px-3 text-xs font-semibold hover:bg-primary/90 transition flex items-center justify-center gap-1"
+                  >
+                    <ShoppingCart className="w-3 h-3" />
+                    {t('bestSeller.addToCart')}
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Desktop Design - Carousel */}
+        <div className="hidden md:block relative mb-12">
           <div className="overflow-hidden">
             <div className="max-w-6xl mx-auto">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -146,8 +196,8 @@ function BestSellerProducts() {
           </div>
         </div>
 
-        {/* Carousel Dots */}
-        <div className="flex justify-center gap-2 mb-8">
+        {/* Carousel Dots - Desktop Only */}
+        <div className="hidden md:flex justify-center gap-2 mb-8">
           {Array.from({ length: totalSlides }).map((_, index) => (
             <button
               key={index}
@@ -160,8 +210,19 @@ function BestSellerProducts() {
           ))}
         </div>
 
-        {/* See All Products Button */}
-        <div className="relative flex justify-center">
+        {/* See All Products Button - Mobile */}
+        <div className="md:hidden text-center mb-4">
+          <Link
+            to="/products"
+            className="inline-flex items-center gap-2 text-primary hover:text-primary/80 font-semibold text-sm"
+          >
+            <span>{t('bestSeller.seeAll')}</span>
+            <ArrowLeft className="w-4 h-4" />
+          </Link>
+        </div>
+
+        {/* See All Products Button - Desktop */}
+        <div className="hidden md:block relative flex justify-center">
           {/* Decorative Starbursts */}
           <div className="absolute -top-4 -left-4 w-6 h-6 text-primary-400">
             <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">

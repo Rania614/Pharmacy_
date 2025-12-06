@@ -1,7 +1,7 @@
 // Mock API - 50 منتج (أدوية وتجميل)
 const products = [
   // أدوية القلب (15 منتج)
-  { id: 1, name: 'أسبرين 100 مجم', brand: 'Bayer', category: 'أدوية', subCategory: 'قلب', price: 25.50, image: 'https://via.placeholder.com/300x300?text=Aspirin', description: 'أسبرين للوقاية من أمراض القلب والأوعية الدموية' },
+  { id: 1, name: 'أسبرين 100 مجم', brand: 'Bayer', category: 'أدوية', subCategory: 'قلب', price: 25.50, stock: 150, expiryDate: '2025-12-31', image: 'https://via.placeholder.com/300x300?text=Aspirin', description: 'أسبرين للوقاية من أمراض القلب والأوعية الدموية' },
   { id: 2, name: 'أتورفاستاتين 20 مجم', brand: 'Pfizer', category: 'أدوية', subCategory: 'قلب', price: 85.00, image: 'https://via.placeholder.com/300x300?text=Atorvastatin', description: 'خافض للكوليسترول والدهون الثلاثية' },
   { id: 3, name: 'أملوديبين 5 مجم', brand: 'Novartis', category: 'أدوية', subCategory: 'قلب', price: 45.75, image: 'https://via.placeholder.com/300x300?text=Amlodipine', description: 'خافض لضغط الدم المرتفع' },
   { id: 4, name: 'ميتوبرولول 50 مجم', brand: 'AstraZeneca', category: 'أدوية', subCategory: 'قلب', price: 35.25, image: 'https://via.placeholder.com/300x300?text=Metoprolol', description: 'علاج ارتفاع ضغط الدم وعدم انتظام ضربات القلب' },
@@ -62,7 +62,17 @@ const products = [
 // Mock API functions
 export const getProducts = () => {
   return new Promise((resolve) => {
-    setTimeout(() => resolve(products), 500);
+    // Add default stock and expiryDate if missing
+    const productsWithDefaults = products.map((product, index) => ({
+      ...product,
+      stock: product.stock !== undefined ? product.stock : Math.floor(Math.random() * 200) + 10, // Random stock 10-210
+      expiryDate: product.expiryDate || (() => {
+        const date = new Date();
+        date.setFullYear(date.getFullYear() + 2); // 2 years from now
+        return date.toISOString().split('T')[0];
+      })(),
+    }));
+    setTimeout(() => resolve(productsWithDefaults), 500);
   });
 };
 

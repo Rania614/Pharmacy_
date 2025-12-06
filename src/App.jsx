@@ -8,9 +8,16 @@ import Products from './pages/Products';
 import Categories from './pages/Categories';
 import ProductDetail from './pages/ProductDetail';
 import Cart from './pages/Cart';
+import Checkout from './pages/Checkout';
 import Wishlist from './pages/Wishlist';
 import Profile from './pages/Profile';
 import AdminDashboard from './pages/AdminDashboard';
+import AdminProducts from './pages/AdminProducts';
+import AdminOrders from './pages/AdminOrders';
+import AdminCustomers from './pages/AdminCustomers';
+import AdminInventory from './pages/AdminInventory';
+import AdminReports from './pages/AdminReports';
+import AdminSettings from './pages/AdminSettings';
 import Login from './pages/Login';
 import NotFound from './pages/NotFound';
 
@@ -32,6 +39,7 @@ function App() {
                 <Route path="/categories/:subCategory" element={<Categories />} />
                 <Route path="/brand/:brand" element={<Categories />} />
                 <Route path="/cart" element={<Cart />} />
+                <Route path="/checkout" element={<Checkout />} />
                 <Route path="/wishlist" element={<Wishlist />} />
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/login" element={<Login />} />
@@ -53,12 +61,12 @@ function App() {
             <AdminLayout>
               <Routes>
                 <Route path="dashboard" element={<AdminDashboard />} />
-                <Route path="products" element={<div className="p-6"><h1 className="text-2xl font-bold">Products Management</h1></div>} />
-                <Route path="orders" element={<div className="p-6"><h1 className="text-2xl font-bold">Orders Management</h1></div>} />
-                <Route path="customers" element={<div className="p-6"><h1 className="text-2xl font-bold">Customers Management</h1></div>} />
-                <Route path="inventory" element={<div className="p-6"><h1 className="text-2xl font-bold">Inventory Management</h1></div>} />
-                <Route path="reports" element={<div className="p-6"><h1 className="text-2xl font-bold">Reports</h1></div>} />
-                <Route path="settings" element={<div className="p-6"><h1 className="text-2xl font-bold">Settings</h1></div>} />
+                <Route path="products" element={<AdminProducts />} />
+                <Route path="orders" element={<AdminOrders />} />
+                <Route path="customers" element={<AdminCustomers />} />
+                <Route path="inventory" element={<AdminInventory />} />
+                <Route path="reports" element={<AdminReports />} />
+                <Route path="settings" element={<AdminSettings />} />
                 <Route path="*" element={<AdminDashboard />} />
               </Routes>
             </AdminLayout>
