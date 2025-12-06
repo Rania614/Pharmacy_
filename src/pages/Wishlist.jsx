@@ -56,7 +56,7 @@ function Wishlist() {
           <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
             <button
               onClick={handleAddAllToCart}
-              className="flex items-center justify-center gap-2 bg-green-500 text-white px-4 py-2.5 rounded-full hover:bg-green-600 transition font-semibold text-sm sm:text-base w-full sm:w-auto"
+              className="flex items-center justify-center gap-2 bg-primary text-white px-4 py-2.5 rounded-full hover:bg-primary-700 transition font-semibold text-sm sm:text-base w-full sm:w-auto"
             >
               <ShoppingCart className="w-4 h-4 sm:w-5 sm:h-5" />
               {t('wishlist.addAllToCart')}
@@ -165,11 +165,11 @@ function Wishlist() {
             <div key={item.id} className="relative group">
               <ProductCard product={item} />
               
-              {/* Action Buttons Overlay */}
-              <div className="absolute top-2 right-2 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+              {/* Action Buttons Overlay - Desktop Only */}
+              <div className="hidden md:flex absolute top-2 right-2 gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
                 <button
                   onClick={() => handleAddToCart(item)}
-                  className="bg-green-500 text-white p-2 rounded-full hover:bg-green-600 transition shadow-lg"
+                  className="bg-primary text-white p-2 rounded-full hover:bg-primary-700 transition shadow-lg"
                   title={t('wishlist.moveToCart')}
                 >
                   <ShoppingCart className="w-5 h-5" />
@@ -180,23 +180,6 @@ function Wishlist() {
                   title={t('wishlist.remove')}
                 >
                   <Trash2 className="w-5 h-5" />
-                </button>
-              </div>
-
-              {/* Mobile Action Buttons */}
-              <div className="md:hidden mt-2 flex gap-2">
-                <button
-                  onClick={() => handleAddToCart(item)}
-                  className="flex-1 flex items-center justify-center gap-2 bg-green-500 text-white px-4 py-2 rounded-full hover:bg-green-600 transition font-semibold"
-                >
-                  <ShoppingCart className="w-4 h-4" />
-                  <span className="text-sm">{t('wishlist.moveToCart')}</span>
-                </button>
-                <button
-                  onClick={() => handleRemove(item.id)}
-                  className="flex items-center justify-center gap-2 bg-red-500 text-white px-4 py-2 rounded-full hover:bg-red-600 transition font-semibold"
-                >
-                  <Trash2 className="w-4 h-4" />
                 </button>
               </div>
             </div>

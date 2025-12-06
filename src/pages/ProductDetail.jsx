@@ -27,6 +27,41 @@ function ProductDetail() {
   );
   const { t } = useTranslation();
 
+  // Get category name for breadcrumb
+  const getCategoryName = () => {
+    if (!product) return '';
+    
+    // If subCategory exists, use it (e.g., "قلب" -> "أدوية القلب", "سكر" -> "أدوية السكر")
+    if (product.subCategory) {
+      if (product.subCategory === 'قلب') return t('categories.heartMedicines');
+      if (product.subCategory === 'سكر') return t('categories.diabetesMedicines');
+      return product.subCategory;
+    }
+    
+    // Otherwise use category (e.g., "تجميل" -> "منتجات التجميل")
+    if (product.category === 'تجميل') return t('categories.cosmetics');
+    return product.category || t('nav.products');
+  };
+
+  // Get category path for breadcrumb
+  const getCategoryPath = () => {
+    if (!product) return '/products';
+    
+    // If subCategory exists, link to subCategory page
+    if (product.subCategory) {
+      if (product.subCategory === 'قلب' || product.subCategory === 'سكر') {
+        return `/categories/${product.subCategory}`;
+      }
+    }
+    
+    // If category is "تجميل", link to cosmetics category
+    if (product.category === 'تجميل') {
+      return '/categories?category=تجميل';
+    }
+    
+    return '/products';
+  };
+
   // Mock images gallery (using same image for now, but can be extended)
   const productImages = product ? [
     product.image,
@@ -150,8 +185,8 @@ function ProductDetail() {
           </li>
           <li className="flex items-center gap-2">
             <ArrowRight className="w-4 h-4" />
-            <Link to="/products" className="hover:text-primary transition">
-              {t('nav.products')}
+            <Link to={getCategoryPath()} className="hover:text-primary transition">
+              {getCategoryName()}
             </Link>
           </li>
           <li className="flex items-center gap-2">

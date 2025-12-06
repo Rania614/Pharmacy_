@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, Shield, Truck, HeadphonesIcon, Star } from 'lucide-react';
+import { ArrowLeft, Shield, Truck, HeadphonesIcon, Star, Phone } from 'lucide-react';
 import { getProducts } from '../data/products';
 import ProductCard from '../components/ProductCard';
 import CategoryCarousel from '../components/CategoryCarousel';
@@ -27,7 +27,18 @@ function Home() {
           PHARM
             </div>
 
+        {/* Logo for Mobile - Top Right of Screen */}
+        <div className="md:hidden absolute top-4 right-4 z-20">
+          <Link to="/" className="flex items-center space-x-2">
+            <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center">
+              <span className="text-primary text-2xl font-bold">🌿</span>
+            </div>
+            <span className="text-xl font-bold text-white">MediHeal</span>
+          </Link>
+        </div>
+
         <div className="container mx-auto px-4 relative z-10">
+
           <div className="grid md:grid-cols-2 gap-8 items-center">
             {/* Left Content */}
             <div className="space-y-6">
@@ -39,16 +50,26 @@ function Home() {
               </p>
 
               {/* CTA Buttons */}
-              <div className="flex flex-wrap gap-4">
+              <div className="flex flex-col md:flex-row gap-4 items-start md:items-center">
+                {/* Top Row: Phone Icon + Shop Now Button (Mobile) */}
+                <div className="flex items-center gap-3 w-full md:w-auto">
+                  {/* Contact Icon - Only visible on Mobile */}
+                  <button className="md:hidden inline-flex items-center justify-center px-6 py-3 bg-white/20 backdrop-blur-sm border-2 border-white text-white rounded-full hover:bg-white/30 transition flex-shrink-0">
+                    <Phone className="w-6 h-6" />
+                  </button>
+                  
+                  <Link
+                    to="/products"
+                    className="inline-flex items-center justify-center bg-primary-50 text-primary px-6 md:px-8 py-3 rounded-full font-bold hover:bg-primary-100 transition shadow-lg flex-1 md:flex-initial"
+                  >
+                    {t('hero.shopNow')}
+                  </Link>
+                </div>
+                
+                {/* Bottom Row: Explore More Button */}
                 <Link
                   to="/products"
-                  className="inline-flex items-center bg-primary-50 text-primary px-8 py-3 rounded-full font-bold hover:bg-primary-100 transition shadow-lg"
-                >
-                  {t('hero.shopNow')}
-                </Link>
-                <Link
-                  to="/products"
-                  className="inline-flex items-center border-2 border-white text-white px-8 py-3 rounded-full font-semibold hover:bg-white/10 transition"
+                  className="inline-flex items-center justify-center border-2 border-white text-white px-6 md:px-8 py-3 rounded-full font-semibold hover:bg-white/10 transition w-full md:w-auto"
                 >
                   {t('hero.exploreMore')}
                 </Link>
